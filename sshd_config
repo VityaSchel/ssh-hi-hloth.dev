@@ -1,6 +1,7 @@
 Match User hi
     PasswordAuthentication yes
     KbdInteractiveAuthentication yes
+    PermitEmptyPasswords yes
     UsePAM yes
     ChrootDirectory /srv/guest-chroot
     ForceCommand /bin/guest-shell
