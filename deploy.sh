@@ -13,6 +13,9 @@ install -d -m 0755 /srv/guest-chroot/{bin,usr/bin,usr/lib,usr/lib64}
 
 rsync -av --chown=root:root ./guest-chroot/ /srv/guest-chroot
 
+install -d -m 0755 /etc/ssh/sshd_config.d
+install -m 0644 ./sshd_config /etc/ssh/sshd_config.d/guest-user.conf
+
 cp /usr/bin/dash /srv/guest-chroot/usr/bin/dash
 ln -sf /usr/bin/dash /srv/guest-chroot/bin/sh
 cp /usr/lib/libedit.so.0 /srv/guest-chroot/usr/lib/libedit.so.0
