@@ -12,7 +12,7 @@ if id -u hi >/dev/null 2>&1; then
    exit 1
 fi
 
-useradd -d /home/hi -s /usr/bin/dash -M -c "ssh hi@hloth.dev" hi
+useradd -d /home/hi -s /bin/sh -M -c "ssh hi@hloth.dev" hi
 
 mkdir -p /srv/guest-chroot
 chown root:root /srv/guest-chroot
