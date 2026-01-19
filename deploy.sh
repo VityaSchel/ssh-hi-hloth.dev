@@ -18,6 +18,7 @@ install -m 0644 ./sshd_config /etc/ssh/sshd_config.d/guest-user.conf
 
 cp /usr/bin/dash /srv/guest-chroot/usr/bin/dash
 ln -sf /usr/bin/dash /srv/guest-chroot/bin/sh
+ln -sf /bin/guest-shell.sh /srv/guest-chroot/bin/guest-shell
 cp /usr/lib/libedit.so.0 /srv/guest-chroot/usr/lib/libedit.so.0
 cp /usr/lib/libc.so.6 /srv/guest-chroot/usr/lib/libc.so.6
 cp /usr/lib/libncursesw.so.6 /srv/guest-chroot/usr/lib/libncursesw.so.6
@@ -27,4 +28,5 @@ ln -sf /lib64/ld-linux-x86-64.so.2 /srv/guest-chroot/usr/lib64/ld-linux-x86-64.s
 chown -R root:root /srv/guest-chroot
 chmod 0755 /srv/guest-chroot /srv/guest-chroot/bin /srv/guest-chroot/lib /srv/guest-chroot/lib64 /srv/guest-chroot/usr /srv/guest-chroot/usr/bin /srv/guest-chroot/usr/lib /srv/guest-chroot/usr/lib64
 chmod 0755 /srv/guest-chroot/usr/bin/dash
-chmod 0644 /srv/guest-chroot/usr/lib/libedit.so.0 /srv/guest-chroot/usr/lib/libc.so.6 /srv/guest-chroot/usr/lib/libncursesw.so.6 /srv/guest-chroot/lib64/ld-linux-x86-64.so.2
+chmod 0644 /srv/guest-chroot/usr/lib/libedit.so.0 /srv/guest-chroot/usr/lib/libc.so.6 /srv/guest-chroot/usr/lib/libncursesw.so.6
+chmod 0755 /srv/guest-chroot/lib64/ld-linux-x86-64.so.2
