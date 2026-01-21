@@ -1,0 +1,3 @@
+Projects: foo, bar
+To return type 'back'.
+To leave type 'exit' or press ^C.

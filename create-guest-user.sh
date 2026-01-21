@@ -3,13 +3,13 @@
 set -e
 
 if [[ $EUID -ne 0 ]]; then
-   echo "This script must be run as root (use sudo)" 
-   exit 1
+	echo "This script must be run as root (use sudo)"
+	exit 1
 fi
 
 if id -u hi >/dev/null 2>&1; then
-   echo "User 'hi' already exists"
-   exit 1
+	echo "User 'hi' already exists"
+	exit 1
 fi
 
 useradd -d /home/hi -s /bin/sh -M -c "ssh hi@hloth.dev" hi

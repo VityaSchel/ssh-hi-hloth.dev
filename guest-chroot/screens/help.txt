@@ -1,0 +1,5 @@
+Available commands:
+- help
+- about
+- projects
+- exit

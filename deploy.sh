@@ -3,8 +3,8 @@
 set -e
 
 if [[ $EUID -ne 0 ]]; then
-   echo "This script must be run as root (use sudo)" 
-   exit 1
+	echo "This script must be run as root (use sudo)"
+	exit 1
 fi
 
 find /srv/guest-chroot -mindepth 1 -delete
