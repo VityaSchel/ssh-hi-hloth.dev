@@ -15,6 +15,25 @@ in_list() {
 	return 1
 }
 
+sanitize_input() {
+	local input="$1"
+	local output=""
+	local char
+	local i=0
+	local len=${#input}
+
+	while [ $i -lt $len ]; do
+		char="${input%"${input#?}"}"
+		input="${input#?}"
+		case "$char" in
+		[\ -~]) output="${output}${char}" ;;
+		esac
+		i=$((i + 1))
+	done
+
+	printf '%s' "$output"
+}
+
 show_screen() {
 	screen_file="$screens_dir/$1.sh"
 	if [ -f "$screen_file" ]; then
@@ -42,16 +61,31 @@ show_prompt() {
 	printf "$(green "hi@hloth.dev"):$(blue "$path")$ "
 }
 
-current_screen="main"
+handle_exit() {
+	if [ -f "$screens_dir/farewell.sh" ]; then
+		sh "$screens_dir/farewell.sh"
+	fi
+}
+
+handle_interrupt() {
+	echo ""
+}
+
+trap handle_exit EXIT
+
+trap handle_interrupt INT
 
 if [ -f "$screens_dir/greeting.sh" ]; then
 	sh "$screens_dir/greeting.sh"
-	echo ""
 fi
+
+current_screen="main"
 
 show_screen "$current_screen"
 
 while show_prompt && IFS= read -r cmd; do
+	cmd="$(sanitize_input "$cmd")"
+
 	case "$cmd" in
 	exit)
 		break
@@ -85,7 +119,8 @@ while show_prompt && IFS= read -r cmd; do
 				current_screen="main"
 				show_screen "$current_screen"
 			else
-				echo "$(red "[Error]") Command not found: $cmd"
+				printf "$(red "[Error]") Command not found: "
+				printf '%s\n' "$cmd"
 				show_screen "projects"
 			fi
 			;;
