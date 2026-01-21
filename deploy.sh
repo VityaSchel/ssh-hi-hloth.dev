@@ -30,3 +30,6 @@ chmod 0755 /srv/guest-chroot /srv/guest-chroot/bin /srv/guest-chroot/lib /srv/gu
 chmod 0755 /srv/guest-chroot/usr/bin/dash
 chmod 0644 /srv/guest-chroot/usr/lib/libedit.so.0 /srv/guest-chroot/usr/lib/libc.so.6 /srv/guest-chroot/usr/lib/libncursesw.so.6
 chmod 0755 /srv/guest-chroot/lib64/ld-linux-x86-64.so.2
+
+chmod 0755 /srv/guest-chroot/bin/guest-shell.sh /srv/guest-chroot/bin/utils.sh
+find /srv/guest-chroot/screens -name "*.sh" -exec chmod 0755 {} \;

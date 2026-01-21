@@ -1,17 +1,36 @@
 #!/bin/sh
 
 screens_dir="$(dirname "$0")/../screens"
+projects="foo bar"
+
+. "$(dirname "$0")/utils.sh"
+
+in_list() {
+	local needle="$1"
+	local list="$2"
+
+	for item in $list; do
+		[ "$item" = "$needle" ] && return 0
+	done
+	return 1
+}
 
 show_screen() {
-	screen_file="$screens_dir/$1.txt"
+	screen_file="$screens_dir/$1.sh"
 	if [ -f "$screen_file" ]; then
-		cat "$screen_file"
+		sh "$screen_file"
 	else
-		echo "[Error] Screen not found: $1"
+		echo "$(red "[Error]") Screen not found: $1"
 	fi
 }
 
 current_screen="main"
+
+if [ -f "$screens_dir/greeting.sh" ]; then
+	sh "$screens_dir/greeting.sh"
+	echo ""
+fi
+
 show_screen "$current_screen"
 
 while IFS= read -r cmd; do
@@ -35,32 +54,24 @@ while IFS= read -r cmd; do
 				show_screen "$current_screen"
 				;;
 			*)
-				echo "[Error] Command not found: $cmd"
+				echo "$(red "[Error]") Command not found: $cmd"
 				show_screen "help"
 				;;
 			esac
 			;;
 		projects)
-			case "$cmd" in
-			back)
+			if in_list "$cmd" "$projects"; then
+				current_screen="projects/$cmd"
+				show_screen "$current_screen"
+			elif [ "$cmd" = "back" ]; then
 				current_screen="main"
 				show_screen "$current_screen"
-				;;
-			"foo")
-				current_screen="projects/foo"
-				show_screen "$current_screen"
-				;;
-			"bar")
-				current_screen="projects/bar"
-				show_screen "$current_screen"
-				;;
-			*)
-				echo "[Error] Command not found: $cmd"
+			else
+				echo "$(red "[Error]") Command not found: $cmd"
 				show_screen "projects"
-				;;
-			esac
+			fi
 			;;
-		projects/foo | projects/bar)
+		projects/*)
 			case "$cmd" in
 			back)
 				current_screen="projects"
