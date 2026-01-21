@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/dash
 
 screens_dir="$(dirname "$0")/../screens"
 projects="foo bar"
@@ -24,6 +24,24 @@ show_screen() {
 	fi
 }
 
+show_prompt() {
+	local path="~"
+
+	case "$current_screen" in
+	main)
+		path="~"
+		;;
+	projects)
+		path="~/projects"
+		;;
+	projects/*)
+		path="~/${current_screen}"
+		;;
+	esac
+
+	printf "$(green "hi@hloth.dev"):$(blue "$path")$ "
+}
+
 current_screen="main"
 
 if [ -f "$screens_dir/greeting.sh" ]; then
@@ -33,7 +51,7 @@ fi
 
 show_screen "$current_screen"
 
-while IFS= read -r cmd; do
+while show_prompt && IFS= read -r cmd; do
 	case "$cmd" in
 	exit)
 		break

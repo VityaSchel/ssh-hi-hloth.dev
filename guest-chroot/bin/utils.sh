@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/dash
 
 color() {
 	local code="$1"
