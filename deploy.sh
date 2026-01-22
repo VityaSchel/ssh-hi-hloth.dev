@@ -30,7 +30,7 @@ cp /usr/bin/dirname /srv/guest-chroot/usr/bin/dirname
 cp /usr/lib64/ld-linux-x86-64.so.2 /srv/guest-chroot/lib64/
 ln -sf /lib64/ld-linux-x86-64.so.2 /srv/guest-chroot/usr/lib64/ld-linux-x86-64.so.2
 
-cp /usr/bin/sed /usr/bin/tr /usr/bin/grep /srv/guest-chroot/usr/bin/
+cp /usr/bin/sed /usr/bin/tr /usr/bin/grep /usr/bin/sleep /usr/bin/stty /srv/guest-chroot/usr/bin/
 cp /usr/lib/libacl.so.1 /srv/guest-chroot/usr/lib/libacl.so.1
 
 chown -R root:root /srv/guest-chroot

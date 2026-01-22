@@ -132,7 +132,7 @@ show_screen "$current_screen"
 while show_prompt && IFS= read -r cmd; do
 	cmd="$(sanitize_input "$cmd")"
 
-	if echo "$cmd" | grep -qE '^sudo(\ |$)'; then
+	if echo "$cmd" | grep -qE '^sudo( |$)'; then
 		if [ "$current_screen" != "sudo" ]; then
 			sleep 0.1
 			printf "Password: "
