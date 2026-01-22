@@ -1,13 +1,36 @@
-#!/bin/dash
+#!/bin/sh
+# Get iTerm2 background color using OSC 4 sequence
 
-# random_id=$(head -c 16 /dev/urandom | base64 | tr -dc 'a-zA-Z0-9' | head -c 12)
-# printf "\033]1337;MultipartFile=name=$(echo -n "$random_id.png" | base64);size=$(stat -f%z "/Users/hloth/Downloads/TgSticker_23bd8897.png"):\033\\"
-# cat "/Users/hloth/Downloads/TgSticker_23bd8897.png" | base64 | fold -w 76 | while read -r line; do
-# 	printf "%s\033\\" "$line"
-# done
-# printf "\033]1337;FileEnd\033\\"
+# Send the query for background color (-2)
+# OSC is \033], ST is \033\\
+printf '\033]4;-2;?\033\\'
 
-printf "\033]1337;SetBadgeFormat=$(echo -n "hiiiiiiiiiiiii" | base64)\033\\"
-printf "\033]9;Test\033\\"
+# Read the response
+# The terminal will respond with: OSC 4 ; -2 ; rgb:RRRR/GGGG/BBBB ST
+IFS='' read -r -d '\' response
 
-printf "\033]9;Test\033\\"
+# Parse the RGB values from the response
+# Response format: ]4;-2;rgb:RRRR/GGGG/BBBB
+rgb_part=$(echo "$response" | sed -n 's/.*rgb:\([^\\]*\).*/\1/p')
+
+if [ -n "$rgb_part" ]; then
+    # Extract R, G, B components
+    red=$(echo "$rgb_part" | cut -d'/' -f1)
+    green=$(echo "$rgb_part" | cut -d'/' -f2)
+    blue=$(echo "$rgb_part" | cut -d'/' -f3)
+    
+    echo "Background color (hex):"
+    echo "  Red:   $red"
+    echo "  Green: $green"
+    echo "  Blue:  $blue"
+    
+    # Convert to 2-digit hex if needed (take first 2 chars of 4-digit values)
+    red_2d=$(echo "$red" | cut -c1-2)
+    green_2d=$(echo "$green" | cut -c1-2)
+    blue_2d=$(echo "$blue" | cut -c1-2)
+    
+    echo ""
+    echo "Approximate RGB (2-digit hex): #${red_2d}${green_2d}${blue_2d}"
+else
+    echo "Failed to get background color"
+fi

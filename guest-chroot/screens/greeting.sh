@@ -2,7 +2,7 @@
 . "$(dirname "$0")/../bin/utils.sh"
 
 echo ""
-chafa --size=32x32 --view-size=50x10 --dither diffusion "$(dirname "$0")/../assets/me.png" --align mid,top
+chafa --size=32x32 --view-size=50x10 --dither diffusion "$(dirname "$0")/../assets/me.png" --align mid,bottom --margin-bottom 0 -t 1 --bg black
 echo "╭─────────────────────────────────╮"
 echo "│ $(bold "Viktor Shchelochkov")             │"
 echo "│ Senior Full Stack Web Developer │"
