@@ -44,6 +44,11 @@ show_screen() {
 	fi
 }
 
+go_to() {
+	current_screen="$1"
+	show_screen "$current_screen"
+}
+
 show_prompt() {
 	local path="~"
 
@@ -57,6 +62,11 @@ show_prompt() {
 	esac
 
 	printf "$(green "hi@hloth.dev"):$(blue "$path")$ "
+}
+
+show_404() {
+	printf "$(red "[Error]") Command not found: "
+	printf '%s\n' "$cmd"
 }
 
 handle_exit() {
@@ -94,81 +104,70 @@ while show_prompt && IFS= read -r cmd; do
 		main)
 			case "$cmd" in
 			help)
-				show_screen "help"
+				show_screen "$cmd"
 				;;
 			about)
-				show_screen "about"
+				show_screen "$cmd"
 				;;
 			me)
-				current_screen="me"
-				show_screen "$current_screen"
+				go_to "$cmd"
 				;;
 			donate)
-				show_screen "donate"
+				show_screen "$cmd"
 				;;
 			showcase)
-				current_screen="showcase"
-				show_screen "$current_screen"
+				go_to "$cmd"
 				;;
 			*)
-				echo "$(red "[Error]") Command not found: $cmd"
+				show_404 "$cmd"
 				show_screen "help"
 				;;
 			esac
 			;;
 		showcase)
 			if in_list "$cmd" "$showcase"; then
-				current_screen="showcase/$cmd"
-				show_screen "$current_screen"
+				go_to "showcase/$cmd"
 			elif [ "$cmd" = "back" ]; then
-				current_screen="main"
-				show_screen "$current_screen"
+				go_to "main"
 			else
-				printf "$(red "[Error]") Command not found: "
-				printf '%s\n' "$cmd"
+				show_404 "$cmd"
 				show_screen "showcase"
 			fi
 			;;
 		showcase/*)
 			case "$cmd" in
 			back)
-				current_screen="showcase"
-				show_screen "$current_screen"
+				go_to "showcase"
 				;;
 			*)
-				echo "Command not found: $cmd"
+				show_404 "$cmd"
 				echo "Type 'back' or 'exit'."
 				;;
 			esac
 			;;
 		me)
 			if in_list "$cmd" "$me"; then
-				current_screen="me/$cmd"
-				show_screen "$current_screen"
+				go_to "me/$cmd"
 			elif [ "$cmd" = "back" ]; then
-				current_screen="main"
-				show_screen "$current_screen"
+				go_to "main"
 			else
-				printf "$(red "[Error]") Command not found: "
-				printf '%s\n' "$cmd"
+				show_404 "$cmd"
 				show_screen "me"
 			fi
 			;;
 		me/*)
 			case "$cmd" in
 			back)
-				current_screen="me"
-				show_screen "$current_screen"
+				go_to "me"
 				;;
 			*)
-				echo "Command not found: $cmd"
+				show_404 "$cmd"
 				echo "Type 'back' or 'exit'."
 				;;
 			esac
 			;;
 		*)
-			current_screen="main"
-			show_screen "$current_screen"
+			go_to "main"
 			;;
 		esac
 		;;
