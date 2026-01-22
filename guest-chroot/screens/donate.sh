@@ -4,3 +4,4 @@
 echo "Donate:"
 echo "- $(bold foo)"
 echo "- $(bold bar)"
+echo "Todo"

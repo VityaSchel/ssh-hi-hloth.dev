@@ -1,4 +1,4 @@
 #!/bin/dash
 . "$(dirname "$0")/../../bin/utils.sh"
 
-echo "$(bold Foo)"
+echo "$(bold Todo)"
