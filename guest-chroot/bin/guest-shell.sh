@@ -74,7 +74,6 @@ handle_directory_screen() {
 	local available_items="$2"
 
 	if [ "$cmd" = "help" ]; then
-		echo 343423423
 		show_screen "${dir_name}/help"
 	elif [ "$cmd" = "back" ] || [ "$cmd" = ".." ]; then
 		go_to "main"
