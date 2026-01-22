@@ -103,19 +103,10 @@ while show_prompt && IFS= read -r cmd; do
 		case "$current_screen" in
 		main)
 			case "$cmd" in
-			help)
+			help | about | donate)
 				show_screen "$cmd"
 				;;
-			about)
-				show_screen "$cmd"
-				;;
-			me)
-				go_to "$cmd"
-				;;
-			donate)
-				show_screen "$cmd"
-				;;
-			showcase)
+			me | showcase)
 				go_to "$cmd"
 				;;
 			*)
@@ -127,8 +118,10 @@ while show_prompt && IFS= read -r cmd; do
 		showcase)
 			if in_list "$cmd" "$showcase"; then
 				go_to "showcase/$cmd"
-			elif [ "$cmd" = "back" ]; then
+			elif [ "$cmd" = "back" ] || [ "$cmd" = ".." ]; then
 				go_to "main"
+			elif [ "$cmd" = "help" ]; then
+				show_screen "showcase/help"
 			else
 				show_404 "$cmd"
 				show_screen "showcase"
@@ -136,20 +129,22 @@ while show_prompt && IFS= read -r cmd; do
 			;;
 		showcase/*)
 			case "$cmd" in
-			back)
+			back | ..)
 				go_to "showcase"
 				;;
 			*)
 				show_404 "$cmd"
-				echo "Type 'back' or 'exit'."
+				show_nav
 				;;
 			esac
 			;;
 		me)
 			if in_list "$cmd" "$me"; then
 				go_to "me/$cmd"
-			elif [ "$cmd" = "back" ]; then
+			elif [ "$cmd" = "back" ] || [ "$cmd" = ".." ]; then
 				go_to "main"
+			elif [ "$cmd" = "help" ]; then
+				show_screen "me/help"
 			else
 				show_404 "$cmd"
 				show_screen "me"
@@ -157,12 +152,12 @@ while show_prompt && IFS= read -r cmd; do
 			;;
 		me/*)
 			case "$cmd" in
-			back)
+			back | ..)
 				go_to "me"
 				;;
 			*)
 				show_404 "$cmd"
-				echo "Type 'back' or 'exit'."
+				show_nav
 				;;
 			esac
 			;;

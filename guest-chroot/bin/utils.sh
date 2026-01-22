@@ -21,3 +21,8 @@ link() {
 	local url="$2"
 	printf "\033]8;;${url}\033\\${text}\033]8;;\033\\"
 }
+
+show_nav() {
+	echo "To return type '$(yellow back)' or '..'."
+	echo "To leave type '$(red exit)' or press ^C."
+}
