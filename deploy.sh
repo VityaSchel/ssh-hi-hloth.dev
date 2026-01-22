@@ -18,7 +18,7 @@ install -m 0644 ./sshd_config /etc/ssh/sshd_config.d/guest-user.conf
 
 cp /usr/bin/dash /srv/guest-chroot/usr/bin/dash
 cp /usr/lib/{libedit.so.0,libc.so.6,libncursesw.so.6} /srv/guest-chroot/usr/lib/
-ln -sf /srv/guest-chroot/bin/sh /srv/guest-chroot/bin/sh
+ln -sf /srv/guest-chroot/usr/bin/sh /srv/guest-chroot/bin/sh
 ln -sf /srv/guest-chroot/bin/dash /srv/guest-chroot/usr/bin/sh
 ln -sf /usr/bin/dash /srv/guest-chroot/bin/dash
 ln -sf /bin/guest-shell.sh /srv/guest-chroot/bin/guest-shell
