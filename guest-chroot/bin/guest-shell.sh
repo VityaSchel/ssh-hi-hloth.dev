@@ -1,7 +1,8 @@
 #!/bin/dash
 
 screens_dir="$(dirname "$0")/../screens"
-projects="foo bar"
+showcase=$(cd "$screens_dir" && ls -1 showcase/ 2>/dev/null | sed 's/\.sh$//' | tr '\n' ' ' | sed 's/ $//')
+me=$(cd "$screens_dir" && ls -1 me/ 2>/dev/null | sed 's/\.sh$//' | tr '\n' ' ' | sed 's/ $//')
 
 . "$(dirname "$0")/utils.sh"
 
@@ -50,10 +51,7 @@ show_prompt() {
 	main)
 		path="~"
 		;;
-	projects)
-		path="~/projects"
-		;;
-	projects/*)
+	*)
 		path="~/${current_screen}"
 		;;
 	esac
@@ -101,8 +99,15 @@ while show_prompt && IFS= read -r cmd; do
 			about)
 				show_screen "about"
 				;;
-			projects)
-				current_screen="projects"
+			me)
+				current_screen="me"
+				show_screen "$current_screen"
+				;;
+			donate)
+				show_screen "donate"
+				;;
+			showcase)
+				current_screen="showcase"
 				show_screen "$current_screen"
 				;;
 			*)
@@ -111,9 +116,9 @@ while show_prompt && IFS= read -r cmd; do
 				;;
 			esac
 			;;
-		projects)
-			if in_list "$cmd" "$projects"; then
-				current_screen="projects/$cmd"
+		showcase)
+			if in_list "$cmd" "$showcase"; then
+				current_screen="showcase/$cmd"
 				show_screen "$current_screen"
 			elif [ "$cmd" = "back" ]; then
 				current_screen="main"
@@ -121,13 +126,38 @@ while show_prompt && IFS= read -r cmd; do
 			else
 				printf "$(red "[Error]") Command not found: "
 				printf '%s\n' "$cmd"
-				show_screen "projects"
+				show_screen "showcase"
 			fi
 			;;
-		projects/*)
+		showcase/*)
 			case "$cmd" in
 			back)
-				current_screen="projects"
+				current_screen="showcase"
+				show_screen "$current_screen"
+				;;
+			*)
+				echo "Command not found: $cmd"
+				echo "Type 'back' or 'exit'."
+				;;
+			esac
+			;;
+		me)
+			if in_list "$cmd" "$me"; then
+				current_screen="me/$cmd"
+				show_screen "$current_screen"
+			elif [ "$cmd" = "back" ]; then
+				current_screen="main"
+				show_screen "$current_screen"
+			else
+				printf "$(red "[Error]") Command not found: "
+				printf '%s\n' "$cmd"
+				show_screen "me"
+			fi
+			;;
+		me/*)
+			case "$cmd" in
+			back)
+				current_screen="me"
 				show_screen "$current_screen"
 				;;
 			*)

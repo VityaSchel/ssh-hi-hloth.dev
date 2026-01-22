@@ -4,5 +4,7 @@
 echo "Available commands:"
 echo "- $(bold help)"
 echo "- $(bold about)"
-echo "- $(bold projects)"
+echo "- $(bold me)"
+echo "- $(bold donate)"
+echo "- $(bold showcase)"
 echo "- $(bold exit)"
