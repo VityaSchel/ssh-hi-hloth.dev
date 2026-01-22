@@ -33,6 +33,9 @@ ln -sf /lib64/ld-linux-x86-64.so.2 /srv/guest-chroot/usr/lib64/ld-linux-x86-64.s
 cp /usr/bin/sed /usr/bin/tr /usr/bin/grep /usr/bin/sleep /usr/bin/stty /srv/guest-chroot/usr/bin/
 cp /usr/lib/libacl.so.1 /srv/guest-chroot/usr/lib/libacl.so.1
 
+cp /usr/bin/ls /srv/guest-chroot/usr/bin/ls
+cp /usr/lib/libcap.so.2 /srv/guest-chroot/usr/lib/libcap.so.2
+
 chown -R root:root /srv/guest-chroot
 chmod 0755 /srv/guest-chroot /srv/guest-chroot/bin /srv/guest-chroot/lib /srv/guest-chroot/lib64 /srv/guest-chroot/usr /srv/guest-chroot/usr/bin /srv/guest-chroot/usr/lib /srv/guest-chroot/usr/lib64
 chmod 0755 /srv/guest-chroot/usr/bin/dash /srv/guest-chroot/usr/bin/chafa
