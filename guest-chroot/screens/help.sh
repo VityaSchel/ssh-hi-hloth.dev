@@ -1,7 +1,7 @@
 #!/bin/dash
 . "$(dirname "$0")/../bin/utils.sh"
 
-echo "Available commands:"
+echo "Available commands: $(conceal "psst... also try 'supersecret' 😉")"
 echo "- $(bold help)"
 echo "  display this help message"
 echo "- $(bold about)"

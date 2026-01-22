@@ -5,6 +5,7 @@ showcase=$(cd "$screens_dir" && ls -1 showcase/ 2>/dev/null | sed 's/\.sh$//' | 
 me=$(cd "$screens_dir" && ls -1 me/ 2>/dev/null | sed 's/\.sh$//' | tr '\n' ' ' | sed 's/ $//')
 
 . "$(dirname "$0")/utils.sh"
+. "$(dirname "$0")/videos.sh"
 
 in_list() {
 	local needle="$1"
@@ -127,6 +128,9 @@ while show_prompt && IFS= read -r cmd; do
 	case "$cmd" in
 	exit)
 		break
+		;;
+	supersecret*)
+		play_video "bad_apple"
 		;;
 	"") ;;
 	*)
