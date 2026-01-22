@@ -42,3 +42,6 @@ chmod 0755 /srv/guest-chroot/lib64/ld-linux-x86-64.so.2
 chmod 0755 /srv/guest-chroot/bin/guest-shell.sh /srv/guest-chroot/bin/utils.sh
 find /srv/guest-chroot/screens -name "*.sh" -exec chmod 0755 {} \;
 find /srv/guest-chroot/assets -type f -exec chmod 0644 {} \;
+
+install -d -m 0755 /srv/guest-chroot/dev
+mknod -m 666 /srv/guest-chroot/dev/null c 1 3
