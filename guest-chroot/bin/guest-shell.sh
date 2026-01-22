@@ -3,9 +3,9 @@
 screens_dir="$(dirname "$0")/../screens"
 showcase=$(cd "$screens_dir" && ls -1 showcase/ 2>/dev/null | sed 's/\.sh$//' | tr '\n' ' ' | sed 's/ $//')
 me=$(cd "$screens_dir" && ls -1 me/ 2>/dev/null | sed 's/\.sh$//' | tr '\n' ' ' | sed 's/ $//')
+sudo=$(cd "$screens_dir" && ls -1 sudo/ 2>/dev/null | sed 's/\.sh$//' | tr '\n' ' ' | sed 's/ $//')
 
 . "$(dirname "$0")/utils.sh"
-. "$(dirname "$0")/videos.sh"
 
 in_list() {
 	local needle="$1"
@@ -53,16 +53,20 @@ go_to() {
 show_prompt() {
 	local path="~"
 
-	case "$current_screen" in
-	main)
-		path="~"
-		;;
-	*)
-		path="~/${current_screen}"
-		;;
-	esac
+	if [ "$current_screen" = "sudo" ]; then
+		printf "$(red "root@hloth.dev"):$(blue "$path")$ "
+	else
+		case "$current_screen" in
+		main)
+			path="~"
+			;;
+		*)
+			path="~/${current_screen}"
+			;;
+		esac
 
-	printf "$(green "hi@hloth.dev"):$(blue "$path")$ "
+		printf "$(green "hi@hloth.dev"):$(blue "$path")$ "
+	fi
 }
 
 show_404() {
@@ -73,13 +77,16 @@ show_404() {
 handle_directory_screen() {
 	local dir_name="$1"
 	local available_items="$2"
+	local openable_items="$3"
 
-	if [ "$cmd" = "help" ]; then
+	if [ "$cmd" = "help" ] || [ "$cmd" = "ls" ] || [ "$cmd" = "l" ] || [ "$cmd" = "ls -a" ] || [ "$cmd" = "ls -lf" ]; then
 		show_screen "${dir_name}/help"
 	elif [ "$cmd" = "back" ] || [ "$cmd" = ".." ]; then
 		go_to "main"
-	elif in_list "$cmd" "$available_items"; then
+	elif in_list "$cmd" "$openable_items"; then
 		go_to "${dir_name}/$cmd"
+	elif in_list "$cmd" "$available_items"; then
+		show_screen "${dir_name}/$cmd"
 	else
 		show_404 "$cmd"
 		show_screen "$dir_name"
@@ -125,12 +132,25 @@ show_screen "$current_screen"
 while show_prompt && IFS= read -r cmd; do
 	cmd="$(sanitize_input "$cmd")"
 
+	if echo "$cmd" | grep -qE '^sudo(\ |$)'; then
+		if [ "$current_screen" != "sudo" ]; then
+			sleep 0.1
+			printf "Password: "
+			stty -echo
+			IFS= read -r password
+			stty echo
+			printf "\\n"
+			sleep 1
+			go_to "sudo"
+			continue
+		else
+			cmd="${cmd#sudo }"
+		fi
+	fi
+
 	case "$cmd" in
 	exit)
 		break
-		;;
-	supersecret*)
-		play_video "bad_apple"
 		;;
 	"") ;;
 	*)
@@ -150,16 +170,19 @@ while show_prompt && IFS= read -r cmd; do
 			esac
 			;;
 		showcase)
-			handle_directory_screen "showcase" "$showcase"
+			handle_directory_screen "showcase" "$showcase" "$showcase"
 			;;
 		showcase/*)
 			handle_directory_subscreen "showcase"
 			;;
 		me)
-			handle_directory_screen "me" "$me"
+			handle_directory_screen "me" "$me" "$me"
 			;;
 		me/*)
 			handle_directory_subscreen "me"
+			;;
+		sudo)
+			handle_directory_screen "sudo" "$sudo" ""
 			;;
 		*)
 			go_to "main"
