@@ -46,3 +46,30 @@ show_nav() {
 	echo "To return type '$(yellow back)' or '..'."
 	echo "To leave type '$(red exit)' or press ^C."
 }
+
+set_tab_title() {
+	printf "\033]0;%s\007" "$1"
+}
+
+set_tab_color() {
+	local red="$1"
+	local green="$2"
+	local blue="$3"
+	printf "\033]6;1;bg;red;brightness;%d\007" "$red"
+	printf "\033]6;1;bg;green;brightness;%d\007" "$green"
+	printf "\033]6;1;bg;blue;brightness;%d\007" "$blue"
+}
+
+send_notification() {
+	local message="$1"
+	printf "\033]9;%s\033\\" "$message"
+}
+
+iterm_explode_fireworks() {
+	printf "\033]1337;RequestAttention=fireworks\033\\"
+}
+
+iterm_set_badge() {
+	local message="$1"
+	printf "\033]1337;SetBadgeFormat=%s\033\\" "$(echo -n "$message" | base64)"
+}
