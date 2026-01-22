@@ -69,6 +69,37 @@ show_404() {
 	printf '%s\n' "$cmd"
 }
 
+handle_directory_screen() {
+	local dir_name="$1"
+	local available_items="$2"
+
+	if [ "$cmd" = "help" ]; then
+		echo 343423423
+		show_screen "${dir_name}/help"
+	elif [ "$cmd" = "back" ] || [ "$cmd" = ".." ]; then
+		go_to "main"
+	elif in_list "$cmd" "$available_items"; then
+		go_to "${dir_name}/$cmd"
+	else
+		show_404 "$cmd"
+		show_screen "$dir_name"
+	fi
+}
+
+handle_directory_subscreen() {
+	local dir_name="$1"
+
+	case "$cmd" in
+	back | ..)
+		go_to "$dir_name"
+		;;
+	*)
+		show_404 "$cmd"
+		show_nav
+		;;
+	esac
+}
+
 handle_exit() {
 	if [ -f "$screens_dir/farewell.sh" ]; then
 		sh "$screens_dir/farewell.sh"
@@ -116,50 +147,16 @@ while show_prompt && IFS= read -r cmd; do
 			esac
 			;;
 		showcase)
-			if in_list "$cmd" "$showcase"; then
-				go_to "showcase/$cmd"
-			elif [ "$cmd" = "back" ] || [ "$cmd" = ".." ]; then
-				go_to "main"
-			elif [ "$cmd" = "help" ]; then
-				show_screen "showcase/help"
-			else
-				show_404 "$cmd"
-				show_screen "showcase"
-			fi
+			handle_directory_screen "showcase" "$showcase"
 			;;
 		showcase/*)
-			case "$cmd" in
-			back | ..)
-				go_to "showcase"
-				;;
-			*)
-				show_404 "$cmd"
-				show_nav
-				;;
-			esac
+			handle_directory_subscreen "showcase"
 			;;
 		me)
-			if in_list "$cmd" "$me"; then
-				go_to "me/$cmd"
-			elif [ "$cmd" = "back" ] || [ "$cmd" = ".." ]; then
-				go_to "main"
-			elif [ "$cmd" = "help" ]; then
-				show_screen "me/help"
-			else
-				show_404 "$cmd"
-				show_screen "me"
-			fi
+			handle_directory_screen "me" "$me"
 			;;
 		me/*)
-			case "$cmd" in
-			back | ..)
-				go_to "me"
-				;;
-			*)
-				show_404 "$cmd"
-				show_nav
-				;;
-			esac
+			handle_directory_subscreen "me"
 			;;
 		*)
 			go_to "main"
