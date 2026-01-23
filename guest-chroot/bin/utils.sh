@@ -7,6 +7,7 @@ color() {
 }
 
 bold() { color "1" "$1"; }
+italic() { printf "\033[3m%s\033[0m" "$1"; }
 dim() { color "2" "$1"; }
 red() { color "31" "$1"; }
 green() { color "32" "$1"; }
