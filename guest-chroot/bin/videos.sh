@@ -80,6 +80,31 @@ play_video() {
 			--bg black \
 			--fg white
 		;;
+	jerma985)
+		chafa "$VIDEOS_SCRIPT_DIR/jerma985.gif" \
+			--work 1 \
+			--threads 1 \
+			--colors full \
+			--optimize 9 \
+			--preprocess off \
+			--clear \
+			--dither diffusion \
+			--speed 30fps \
+			--colors full \
+			--size 80xauto
+		;;
+	sillycat)
+		chafa "$VIDEOS_SCRIPT_DIR/sillycat.gif" \
+			--work 1 \
+			--threads 1 \
+			--colors full \
+			--optimize 9 \
+			-t 0.72 \
+			--clear \
+			--size 100xauto \
+			--symbols vhalf \
+			--format symbols
+		;;
 	*)
 		echo "$(red "[Error]") Video not found: $video"
 		;;
