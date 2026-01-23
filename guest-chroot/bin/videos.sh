@@ -1,6 +1,7 @@
 #!/bin/dash
-
-VIDEOS_SCRIPT_DIR="$(dirname "$0")"
+ROOT_DIR="${ROOT_DIR:-$(dirname "$0")/..}"
+. "$ROOT_DIR/bin/utils.sh"
+VIDEOS_SCRIPT_DIR="$ROOT_DIR/assets"
 
 play_video() {
 	local video="$1"
@@ -8,7 +9,7 @@ play_video() {
 	bad_apple)
 		chafa \
 			--size=60x45 \
-			"$VIDEOS_SCRIPT_DIR/../assets/bad_apple.gif" \
+			"$VIDEOS_SCRIPT_DIR/bad_apple.gif" \
 			--work 1 \
 			--threads 1 \
 			--colors 2 \
@@ -22,7 +23,8 @@ play_video() {
 		;;
 	bmo)
 		chafa \
-			--size=60x45 "$VIDEOS_SCRIPT_DIR/../assets/bmo.gif" \
+			--size=60x45 \
+			"$VIDEOS_SCRIPT_DIR/bmo.gif" \
 			--work 1 \
 			--threads 1 \
 			--colors 256 \
@@ -34,6 +36,49 @@ play_video() {
 			--clear \
 			--fg white \
 			--dither diffusion
+		;;
+	zan)
+		chafa \
+			--size=60x60 \
+			"$VIDEOS_SCRIPT_DIR/thatguyzan.gif" \
+			--work 1 \
+			--threads 1 \
+			--colors full \
+			--optimize 9 \
+			--fill=imported \
+			--preprocess off \
+			--clear \
+			--dither diffusion
+		;;
+	skyrim)
+		chafa \
+			--size=60x60 \
+			"$VIDEOS_SCRIPT_DIR/skyrim_skeleton.gif" \
+			--work 1 \
+			--threads 1 \
+			--colors full \
+			--optimize 9 \
+			--symbols=vhalf \
+			--preprocess off \
+			--clear \
+			--dither diffusion \
+			--speed 30fps
+		;;
+	purple_guy)
+		chafa \
+			"$VIDEOS_SCRIPT_DIR/purple_guy.gif" \
+			--work 1 \
+			--threads 1 \
+			--colors full \
+			--optimize 9 \
+			--symbols=vhalf \
+			--preprocess off \
+			--clear \
+			--dither diffusion \
+			--speed 16fps -t 1 \
+			--align mid,mid \
+			--bg black \
+			--fg white
 		;;
 	*)
 		echo "$(red "[Error]") Video not found: $video"

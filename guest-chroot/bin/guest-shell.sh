@@ -1,11 +1,13 @@
 #!/bin/dash
 
-screens_dir="$(dirname "$0")/../screens"
+ROOT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
+
+screens_dir="$ROOT_DIR/screens"
 showcase=$(cd "$screens_dir" && ls -1 showcase/ 2>/dev/null | sed 's/\.sh$//' | tr '\n' ' ' | sed 's/ $//')
 me=$(cd "$screens_dir" && ls -1 me/ 2>/dev/null | sed 's/\.sh$//' | tr '\n' ' ' | sed 's/ $//')
 sudo=$(cd "$screens_dir" && ls -1 sudo/ 2>/dev/null | sed 's/\.sh$//' | tr '\n' ' ' | sed 's/ $//')
 
-. "$(dirname "$0")/utils.sh"
+. "$ROOT_DIR/bin/utils.sh"
 
 in_list() {
 	local needle="$1"

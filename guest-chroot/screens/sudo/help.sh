@@ -1,4 +1,4 @@
 #!/bin/dash
 
-echo "bad_apple   bmo     todooo  todoooooo"
-echo "todooo      todooo  todo"
+echo "bad_apple   bmo     skyrim  purple_guy"
+echo "zan         todooo  todo"

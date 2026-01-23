@@ -1,5 +1,5 @@
 #!/bin/dash
-. "$(dirname "$0")/../../bin/videos.sh"
-VIDEOS_SCRIPT_DIR="$(dirname "$0")/../../bin"
+ROOT_DIR="$(dirname "$0")/../../"
+. "$ROOT_DIR/bin/videos.sh"
 
 play_video "bad_apple"
