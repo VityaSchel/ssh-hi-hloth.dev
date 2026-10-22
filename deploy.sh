@@ -26,6 +26,9 @@ for bin in "${BINARIES[@]}"; do
 	fi
 done
 
+if ! id -u hi >/dev/null 2>&1; then
+	useradd -M -p '' -d /home/hi -s /bin/sh -c "ssh hi@hloth.dev" hi
+fi
 uid=$(id -u hi)
 gid=$(id -g hi)
 
