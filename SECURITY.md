@@ -2,7 +2,7 @@
 
 - A separate user account with limited privileges
 - Chrooted into a restricted directory with no access to the rest of the filesystem
-- No binaries except for dash (shell) and built ins
+- No binaries except for dash (shell), chafa, grep, sed and a few coreutils, with only the libraries they link
 - Strict permissions on all files and directories in the chroot
 - ForceCommand to restrict the user to the guest shell
 - AllowTcpForwarding disabled to prevent port forwarding
