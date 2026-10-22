@@ -8,7 +8,21 @@ if [[ $EUID -ne 0 ]]; then
 fi
 
 CHROOT=/srv/guest-chroot
+DROPIN=/etc/ssh/sshd_config.d/guest-user.conf
+OWNER_LOGINS=(hloth git)
 BINARIES=(/usr/bin/dash /usr/bin/chafa /usr/bin/dirname /usr/bin/grep /usr/bin/ls /usr/bin/sed /usr/bin/sleep /usr/bin/stty /usr/bin/tr)
+
+effective() {
+	sshd -T -C "user=$1,host=localhost,addr=127.0.0.1" | sort
+}
+
+restore_dropin() {
+	if [[ -f $scratch/dropin ]]; then
+		install -m 644 -o root -g root "$scratch/dropin" "$DROPIN"
+	else
+		rm -f "$DROPIN"
+	fi
+}
 
 smoke_test() {
 	local bin
@@ -68,10 +82,30 @@ if ! smoke_test 2>"$scratch/errors" || [[ -s $scratch/errors ]]; then
 	exit 1
 fi
 
-install -m 644 -o root -g root ./sshd_config /etc/ssh/sshd_config.d/guest-user.conf
+declare -A before
+for user in hi "${OWNER_LOGINS[@]}"; do
+	before[$user]=$(effective "$user")
+done
+[[ ! -f $DROPIN ]] || cp -p "$DROPIN" "$scratch/dropin"
+install -m 644 -o root -g root ./sshd_config "$DROPIN"
+if ! sshd -t; then
+	restore_dropin
+	echo "sshd rejects the new drop-in, so the old one is back"
+	exit 1
+fi
+for user in "${OWNER_LOGINS[@]}"; do
+	if [[ $(effective "$user") != "${before[$user]}" ]]; then
+		restore_dropin
+		echo "The new drop-in changes sshd settings for $user, so the old one is back"
+		exit 1
+	fi
+done
+echo "Effective sshd settings that change for hi (old, then new indented):"
+comm -3 <(echo "${before[hi]}") <(effective hi)
 
 if [[ -d $CHROOT ]]; then
 	mv --exchange -T "$stage" "$CHROOT"
 else
 	mv -T "$stage" "$CHROOT"
 fi
+systemctl reload sshd
