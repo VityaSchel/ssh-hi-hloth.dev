@@ -2,6 +2,8 @@ Match User hi
     PasswordAuthentication yes
     KbdInteractiveAuthentication yes
     PermitEmptyPasswords yes
+    PAMServiceName ssh-hi
+    LogLevel ERROR
     ChrootDirectory /srv/guest-chroot
     ForceCommand /bin/guest-shell
     MaxSessions 1

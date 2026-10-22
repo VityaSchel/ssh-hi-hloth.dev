@@ -85,6 +85,7 @@ fi
 install -D -m 644 -o root -g root ./user-slice.conf "/etc/systemd/system/user-$uid.slice.d/ssh-hi.conf"
 systemctl daemon-reload
 systemctl show "user-$uid.slice" -p CPUQuotaPerSecUSec -p MemoryHigh -p MemoryMax -p MemorySwapMax -p TasksMax
+install -m 644 -o root -g root ./pam.d/ssh-hi /etc/pam.d/ssh-hi
 
 declare -A before
 for user in hi "${OWNER_LOGINS[@]}"; do
@@ -113,3 +114,8 @@ else
 	mv -T "$stage" "$CHROOT"
 fi
 systemctl reload sshd
+
+lastlog2 --clear --user hi || echo "Could not clear lastlog2's entry for hi"
+if [[ -f /var/log/wtmp ]]; then
+	echo "/var/log/wtmp holds $(last -w -f /var/log/wtmp hi | grep -c '^hi ' || true) guest logins; sshd records each with its IP"
+fi
