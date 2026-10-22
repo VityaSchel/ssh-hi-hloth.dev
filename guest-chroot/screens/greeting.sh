@@ -6,6 +6,7 @@ echo ""
 
 chafa \
 	--probe off \
+	--threads 1 \
 	--size=32x32 \
 	--view-size=50x10 \
 	--dither diffusion \

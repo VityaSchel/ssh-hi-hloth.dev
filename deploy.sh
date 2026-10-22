@@ -82,6 +82,10 @@ if ! smoke_test 2>"$scratch/errors" || [[ -s $scratch/errors ]]; then
 	exit 1
 fi
 
+install -D -m 644 -o root -g root ./user-slice.conf "/etc/systemd/system/user-$uid.slice.d/ssh-hi.conf"
+systemctl daemon-reload
+systemctl show "user-$uid.slice" -p CPUQuotaPerSecUSec -p MemoryHigh -p MemoryMax -p MemorySwapMax -p TasksMax
+
 declare -A before
 for user in hi "${OWNER_LOGINS[@]}"; do
 	before[$user]=$(effective "$user")
