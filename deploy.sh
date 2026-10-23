@@ -10,7 +10,7 @@ fi
 CHROOT=/srv/guest-chroot
 DROPIN=/etc/ssh/sshd_config.d/guest-user.conf
 OWNER_LOGINS=(hloth git)
-BINARIES=(/usr/bin/dash /usr/bin/chafa /usr/bin/dirname /usr/bin/grep /usr/bin/ls /usr/bin/sed /usr/bin/sleep /usr/bin/stty /usr/bin/tr)
+BINARIES=(/usr/bin/dash /usr/local/bin/chafa /usr/bin/dirname /usr/bin/grep /usr/bin/ls /usr/bin/sed /usr/bin/sleep /usr/bin/stty /usr/bin/tr)
 
 effective() {
 	sshd -T -C "user=$1,host=localhost,addr=127.0.0.1" | sort
@@ -27,7 +27,7 @@ restore_dropin() {
 smoke_test() {
 	local bin
 	for bin in "${BINARIES[@]:1}"; do
-		chroot --userspec="$uid:$gid" "$stage" "$bin" --version >/dev/null || return
+		chroot --userspec="$uid:$gid" "$stage" "/usr/bin/${bin##*/}" --version >/dev/null || return
 	done
 	chroot --userspec="$uid:$gid" "$stage" /usr/bin/chafa --probe off --animate off --size 8x4 /assets/bmo.gif >/dev/null || return
 	printf 'help\nabout\nme\nexit\n' | chroot --userspec="$uid:$gid" "$stage" /bin/sh -c /bin/guest-shell >/dev/null
@@ -35,7 +35,7 @@ smoke_test() {
 
 for bin in "${BINARIES[@]}"; do
 	if [[ ! -x $bin ]]; then
-		echo "$bin is missing; install its package first (chafa: pacman -S chafa)"
+		echo "$bin is missing; install it first"
 		exit 1
 	fi
 done
@@ -66,7 +66,7 @@ if grep 'not found' <<<"$deps"; then
 	exit 1
 fi
 for bin in "${BINARIES[@]}"; do
-	install -m 755 "$bin" "$stage$bin"
+	install -m 755 "$bin" "$stage/usr/bin/${bin##*/}"
 done
 while IFS= read -r lib; do
 	install -m 755 "$lib" "$stage/usr/lib/${lib##*/}"
