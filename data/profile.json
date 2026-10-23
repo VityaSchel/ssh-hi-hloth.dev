@@ -1,0 +1,260 @@
+{
+	"name": "Viktor Shchelochkov",
+	"role": "Senior Full Stack Web Developer",
+	"location": "Madrid, Spain",
+	"birthday": {
+		"year": 2005,
+		"month": 7,
+		"day": 6,
+		"utcOffsetHours": 4
+	},
+	"summary": "Hi, I’m Viktor Shchelochkov — Full Stack Web Developer and open-source enthusiast. I build applications and websites in Svelte, React, Next.js, and Swift.",
+	"about": {
+		"title": "„Think different“",
+		"subtitle": "is my life slogan",
+		"paragraphs": [
+			"Thinking different was a choice I made early in life. As a kid, I often felt two steps ahead of my classmates — and out of place because of it. While others followed the curriculum, I was tinkering with computers, building my first website at 9 and discovering my first security vulnerability in my school’s IT system by 15. Instead of curiosity, I was met with suspicion.",
+			"At school IT competitions, most participants showcased recycled ideas — generic research, overused robots, or well-known solutions for unneeded problems. I think different, so I always focused on creativity, innovation, and real-world usefulness, surprising juries with modern technologies outstanding from what they're used to.",
+			"At home, it wasn’t much different. My parents didn’t see value in my path and pressured me to study. By 17, I moved into my own apartment to create space for the future I believed in. People, whose whole goal in life is to serve the country and have two kids, think that a progressive young boy announcing he’s moving to Europe with his boyfriend is crazy. But I think different."
+		]
+	},
+	"links": [
+		{
+			"id": "upwork",
+			"label": "Upwork",
+			"title": "My Upwork",
+			"url": "https://www.upwork.com/freelancers/~01a1f59e7a4697be89",
+			"highlight": false
+		},
+		{
+			"id": "forgejo",
+			"label": "Forgejo",
+			"title": "My Git server (Forgejo)",
+			"url": "https://git.hloth.dev/hloth",
+			"highlight": true
+		},
+		{
+			"id": "linkedin",
+			"label": "LinkedIn",
+			"title": "My LinkedIn",
+			"url": "https://www.linkedin.com/in/hloth",
+			"highlight": false
+		},
+		{
+			"id": "matrix",
+			"label": "Matrix",
+			"title": "Contact me via Matrix (preferred)",
+			"url": "https://matrix.to/#/@hloth:hloth.dev",
+			"highlight": true
+		},
+		{
+			"id": "telegram",
+			"label": "Telegram",
+			"title": "Contact me via Telegram",
+			"url": "https://t.me/hlothdev",
+			"highlight": false
+		},
+		{
+			"id": "discord",
+			"label": "Discord",
+			"title": "Contact me via Discord",
+			"url": "https://discord.com/users/329249421332316166",
+			"highlight": false
+		},
+		{
+			"id": "email",
+			"label": "Email",
+			"title": "Contact me via email",
+			"url": "mailto:hi@hloth.dev",
+			"highlight": false
+		},
+		{
+			"id": "blog",
+			"label": "Blog",
+			"title": "Blog",
+			"url": "https://blog.hloth.dev/",
+			"highlight": false
+		},
+		{
+			"id": "instagram",
+			"label": "Instagram",
+			"title": "Instagram",
+			"url": "https://instagram.com/hlothdev",
+			"highlight": false
+		}
+	],
+	"showcase": [
+		{
+			"id": "bes",
+			"kind": "website",
+			"name": "Business Estate Solutions CRM",
+			"summary": "A CRM system for a real estate agency",
+			"url": "https://hloth.dev/showcase/bes"
+		},
+		{
+			"id": "nock-trade",
+			"kind": "website",
+			"name": "Nock Trade Crypto Exchange",
+			"summary": "A trading platform that allows users to trade various assets seamlessly, made for freelance client in 2025",
+			"url": "https://hloth.dev/showcase/nock-trade"
+		},
+		{
+			"id": "moreofme",
+			"kind": "website",
+			"name": "Moreof.me Social",
+			"summary": "A personal web space, encouraging users to express their thoughts and hobbies, made for freelance client in 2024-2025",
+			"url": "https://hloth.dev/showcase/moreofme"
+		},
+		{
+			"id": "x5-websites",
+			"kind": "website",
+			"name": "X5.io Websites",
+			"summary": "B2B SaaS websites for x5.io/bot.biz built with React & Next.js, made for freelance client in 2021-2023",
+			"url": "https://hloth.dev/showcase/x5-websites"
+		},
+		{
+			"id": "ryo-coin",
+			"kind": "website",
+			"name": "RYO Coin",
+			"summary": "A website for RYO, a privacy-focused cryptocurrency, made for freelance client in 2025",
+			"url": "https://hloth.dev/showcase/ryo-coin"
+		},
+		{
+			"id": "unddit",
+			"kind": "website",
+			"name": "Unddit",
+			"summary": "A frontend for Unddit powered by PullPush — view removed Reddit posts and comments, made for freelance client in 2025",
+			"url": "https://hloth.dev/showcase/unddit"
+		},
+		{
+			"id": "been-foss",
+			"kind": "website",
+			"name": "been-foss",
+			"summary": "A free open source alternative to ad and trackers cluttered \"been\" app made with Svelte 5",
+			"url": "https://hloth.dev/showcase/been-foss"
+		},
+		{
+			"id": "hloth-blog",
+			"kind": "website",
+			"name": "hloth blog",
+			"summary": "My personal blog about web development and personal projects",
+			"url": "https://hloth.dev/showcase/hloth-blog"
+		},
+		{
+			"id": "batumi-bike",
+			"kind": "website",
+			"name": "Batumi.bike",
+			"summary": "A map of safe roads for electric scooters in Batumi, Georgia based on OpenStreetMap data",
+			"url": "https://hloth.dev/showcase/batumi-bike"
+		},
+		{
+			"id": "session-web",
+			"kind": "website",
+			"name": "Session Web",
+			"summary": "An experimental project running Session messenger in a web browser online",
+			"url": "https://hloth.dev/showcase/session-web"
+		},
+		{
+			"id": "sipacker",
+			"kind": "website",
+			"name": "SIPacker",
+			"summary": "A PWA for creating playable SiGame custom packs",
+			"url": "https://hloth.dev/showcase/sipacker"
+		},
+		{
+			"id": "oge-generator",
+			"kind": "website",
+			"name": "OGE generator",
+			"summary": "A next-generation generator for the national informatics exam in Russia",
+			"url": "https://hloth.dev/showcase/oge-generator"
+		},
+		{
+			"id": "lufin",
+			"kind": "project",
+			"name": "Lufin E2EE File Sharing",
+			"summary": "A modern self-hosted file-sharing service and an alternative to lufi",
+			"url": "https://hloth.dev/showcase/lufin"
+		},
+		{
+			"id": "pow-reaction",
+			"kind": "project",
+			"name": "pow-reaction JS library",
+			"summary": "A library for proof-of-work reactions built with Svelte 👍 ❤️ 👀 😮 🤔 🚀",
+			"url": "https://hloth.dev/showcase/pow-reaction"
+		},
+		{
+			"id": "byom",
+			"kind": "project",
+			"name": "Build Your Own Messenger",
+			"summary": "Build Your Own post-quantum self-hosted end-to-end encrypted Messenger",
+			"url": "https://hloth.dev/showcase/byom"
+		},
+		{
+			"id": "session-notifier",
+			"kind": "project",
+			"name": "Session Notifier Serverless Platform",
+			"summary": "A REST API for sending Session messages programmatically, made for freelance client in 2024",
+			"url": "https://hloth.dev/showcase/session-notifier"
+		},
+		{
+			"id": "jswitcher",
+			"kind": "project",
+			"name": "JSwitcher Figma plugin",
+			"summary": "A Figma plugin for seamless component and font conversion",
+			"url": "https://hloth.dev/showcase/jswitcher"
+		},
+		{
+			"id": "ons-registry",
+			"kind": "project",
+			"name": "ONS Registry e-commerce",
+			"summary": "A website collecting decrypted ONS/LNS/SNS names and their history, price, owner, etc from the Session Token blockchain",
+			"url": "https://hloth.dev/showcase/ons-registry"
+		},
+		{
+			"id": "bunsogs",
+			"kind": "project",
+			"name": "Bunsogs",
+			"summary": "A better Session Open Group Server implementation in TypeScript with Bun",
+			"url": "https://hloth.dev/showcase/bunsogs"
+		},
+		{
+			"id": "samsung-pinger",
+			"kind": "project",
+			"name": "Samsung Pinger",
+			"summary": "A macOS widget with a \"Ring my Samsung\" button device, written in Swift",
+			"url": "https://hloth.dev/showcase/samsung-pinger"
+		},
+		{
+			"id": "session-native",
+			"kind": "project",
+			"name": "Session Native",
+			"summary": "An unofficial native macOS client for Session messenger",
+			"url": "https://hloth.dev/showcase/session-native"
+		},
+		{
+			"id": "session-watchos",
+			"kind": "project",
+			"name": "Session watchOS",
+			"summary": "An unofficial native Apple Watch watchOS client for Session Messenger",
+			"url": "https://hloth.dev/showcase/session-watchos"
+		},
+		{
+			"id": "ps4-merger",
+			"kind": "project",
+			"name": "PS4 Merger",
+			"summary": "A PlayStation 4 developer tool allowing to merge .pkg files directly on the console",
+			"url": "https://hloth.dev/showcase/ps4-merger"
+		},
+		{
+			"id": "mtproto-mobile",
+			"kind": "project",
+			"name": "Mtproto Mobile",
+			"summary": "An Android app allowing raw communication with Telegram API using Core API protocol.",
+			"url": "https://hloth.dev/showcase/mtproto-mobile"
+		}
+	],
+	"donate": {
+		"url": "https://hloth.dev/donate",
+		"signedText": "https://hloth.dev/donate-pgp-signed.txt"
+	}
+}

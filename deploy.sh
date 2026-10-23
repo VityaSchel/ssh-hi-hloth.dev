@@ -10,7 +10,7 @@ fi
 CHROOT=/srv/guest-chroot
 DROPIN=/etc/ssh/sshd_config.d/guest-user.conf
 OWNER_LOGINS=(hloth git)
-BINARIES=(/usr/bin/dash /usr/local/bin/chafa /usr/bin/dirname /usr/bin/grep /usr/bin/ls /usr/bin/sed /usr/bin/sleep /usr/bin/stty /usr/bin/tr)
+BINARIES=(/usr/bin/dash /usr/local/bin/chafa /usr/bin/date /usr/bin/dirname /usr/bin/grep /usr/bin/ls /usr/bin/sed /usr/bin/sleep /usr/bin/stty /usr/bin/tr)
 
 effective() {
 	sshd -T -C "user=$1,host=localhost,addr=127.0.0.1" | sort
