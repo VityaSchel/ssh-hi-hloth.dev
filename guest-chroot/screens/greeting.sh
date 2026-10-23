@@ -5,7 +5,6 @@ ROOT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 echo ""
 
 chafa \
-	--probe off \
 	--threads 1 \
 	--size=32x32 \
 	--view-size=50x10 \

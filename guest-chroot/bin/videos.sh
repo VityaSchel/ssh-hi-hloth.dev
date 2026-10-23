@@ -11,7 +11,6 @@ play_video() {
 			--size=60x45 \
 			"$VIDEOS_SCRIPT_DIR/bad_apple.gif" \
 			--work 1 \
-			--probe off \
 			--threads 1 \
 			--colors 2 \
 			--optimize 9 \
@@ -27,7 +26,6 @@ play_video() {
 			--size=60x45 \
 			"$VIDEOS_SCRIPT_DIR/bmo.gif" \
 			--work 1 \
-			--probe off \
 			--threads 1 \
 			--colors 256 \
 			--optimize 9 \
@@ -44,7 +42,6 @@ play_video() {
 			--size=60x60 \
 			"$VIDEOS_SCRIPT_DIR/thatguyzan.gif" \
 			--work 1 \
-			--probe off \
 			--threads 1 \
 			--colors full \
 			--optimize 9 \
@@ -58,7 +55,6 @@ play_video() {
 			--size=60x60 \
 			"$VIDEOS_SCRIPT_DIR/skyrim_skeleton.gif" \
 			--work 1 \
-			--probe off \
 			--threads 1 \
 			--colors full \
 			--optimize 9 \
@@ -72,7 +68,6 @@ play_video() {
 		chafa \
 			"$VIDEOS_SCRIPT_DIR/purple_guy.gif" \
 			--work 1 \
-			--probe off \
 			--threads 1 \
 			--colors full \
 			--optimize 9 \
@@ -88,7 +83,6 @@ play_video() {
 	jerma985)
 		chafa "$VIDEOS_SCRIPT_DIR/jerma985.gif" \
 			--work 1 \
-			--probe off \
 			--threads 1 \
 			--colors full \
 			--optimize 9 \
@@ -102,7 +96,6 @@ play_video() {
 	sillycat)
 		chafa "$VIDEOS_SCRIPT_DIR/sillycat.gif" \
 			--work 1 \
-			--probe off \
 			--threads 1 \
 			--colors full \
 			--optimize 9 \
